@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const API = axios.create({
-  baseURL: 'https://682d1a01-f66c-4d70-bd57-6c1738043f74.e1-us-east-azure.choreoapps.dev/api',
+  baseURL: '/api',
 });
 
 

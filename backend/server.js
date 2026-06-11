@@ -38,22 +38,8 @@ connectDB();
 
 const app = express();
 
-
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'https://lemith-task-manager.netlify.app' 
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-
-    if (!origin || allowedOrigins.indexOf(origin) !== -1 || origin === process.env.FRONTEND_URL) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: true, 
   credentials: true
 }));
 
@@ -67,7 +53,12 @@ app.get('/', (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 8080; 
-app.listen(PORT, () => {
-  console.log(`Server is running properly on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 8080; 
+  app.listen(PORT, () => {
+    console.log(`Server is running properly on port ${PORT}`);
+  });
+}
+
+
+module.exports = app;
